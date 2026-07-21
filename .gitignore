@@ -1,0 +1,7 @@
+# 절대 공개 저장소에 올리면 안 되는 파일들 (안전벨트)
+secret.key
+registry.json
+*.py
+*.xlsx
+_qr*.png
+_qrtext*.txt
