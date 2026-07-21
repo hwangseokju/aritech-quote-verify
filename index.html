@@ -110,11 +110,18 @@ async function verify(){
   }
 }
 
-// QR이 URL(#p=...)로 열린 경우 자동 검증 (향후 견적서용)
-window.addEventListener('DOMContentLoaded',()=>{
+// QR이 URL(#p=...)로 열린 경우 자동 검증 (스캔 즉시 결과 표시)
+function autoFromHash(){
   const m=location.hash.match(/[#&]p=([^&]+)/);
-  if(m){ try{ document.getElementById('in').value=decodeURIComponent(escape(atob(m[1].replace(/-/g,'+').replace(/_/g,'/')))); verify(); }catch(e){} }
-});
+  if(!m) return;
+  try{
+    document.getElementById('in').value=decodeURIComponent(escape(atob(m[1].replace(/-/g,'+').replace(/_/g,'/'))));
+    verify();
+  }catch(e){}
+}
+window.addEventListener('hashchange', autoFromHash);
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', autoFromHash);
+else autoFromHash();
 </script>
 </body>
 </html>
