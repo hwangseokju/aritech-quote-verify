@@ -68,6 +68,7 @@ async function sha256hex(s){
 }
 function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
 function won(n){try{return Number(n).toLocaleString('ko-KR')+' 원';}catch(e){return n;}}
+function row(label,val){return '<tr><th>'+label+'</th><td>'+val+'</td></tr>';}
 
 async function verify(){
   const res=document.getElementById('res');
