@@ -88,7 +88,7 @@ async function verify(){
   catch(e){ res.innerHTML='<div class="badge bad">❌ 형식 오류</div><div class="note">QR 스캔 내용(JSON)을 그대로 붙여넣어 주세요.</div>'; return; }
 
   const h=await sha256hex(canonical(p));
-  const docId=(p.sig||'').slice(0,12).toUpperCase();
+  const docId=esc(String(p.sig||'').replace(/[^0-9a-fA-F]/g,'').slice(0,12).toUpperCase());  // 입력값이라 16진수만
 
   if(HASHES.has(h)){
     res.innerHTML='<div class="badge ok">✅ 진본입니다</div>'+
